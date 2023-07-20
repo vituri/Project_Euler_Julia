@@ -1,7 +1,16 @@
+"""
+Module with auxiliar functions to solve some problems.
+"""
 module Euler
 
+"""
+Check if a number `d` divides a number `n`.
+"""
 divides(d::Integer, n::Integer) = n % d == 0
 
+"""
+Given a number `n` return a vector with its prime factors
+"""
 function prime_factors(n::Integer)
     divs = Int64[]
     temp_n = n
@@ -26,6 +35,10 @@ function prime_factors(n::Integer)
     return divs
 end
 
+"""
+Return a vector with all primes up to `n` using the
+sieve of Eratosthenes algorithm.
+"""
 function sieve_of_eratosthenes(n::Integer)
     sieve = trues(n)  # Create a boolean array to mark primes
     
@@ -43,7 +56,6 @@ function sieve_of_eratosthenes(n::Integer)
     return primes
 end
 
-
-
-
 end # end module
+
+import .Euler

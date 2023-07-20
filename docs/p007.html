@@ -268,7 +268,7 @@ What is the <span class="math inline">\(10\,001\)</span>st prime number?
 <section id="julia" class="level3">
 <h3 class="anchored" data-anchor-id="julia">Julia</h3>
 <div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is_divisible_by</span>(n<span class="op">::</span><span class="dt">Integer</span>, q<span class="op">::</span><span class="dt">Integer</span>) <span class="op">=</span> n <span class="op">%</span> q <span class="op">==</span> <span class="fl">0</span>;</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span>(<span class="st">"euler.jl"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">find_next_prime</span>(primes)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> primes[<span class="kw">end</span>]</span>
@@ -278,7 +278,7 @@ What is the <span class="math inline">\(10\,001\)</span>st prime number?
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        not_prime <span class="op">=</span> <span class="cn">false</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> q <span class="op">∈</span> primes</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            not_prime <span class="op">=</span> <span class="fu">is_divisible_by</span>(n, q)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            not_prime <span class="op">=</span> Euler.<span class="fu">divides</span>(q, n)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> not_prime</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span>                </span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">end</span>            </span>
@@ -314,11 +314,11 @@ What is the <span class="math inline">\(10\,001\)</span>st prime number?
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div class="ansi-escaped-output">
 <pre>BenchmarkTools.Trial: 63 samples with 1 evaluation.
- Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">79.467 ms</span> … <span class="ansi-magenta-fg">79.567 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">79.493 ms              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">79.496 ms</span> ± <span class="ansi-green-fg">21.702 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>0.00% ± 0.00%
-    ▆  ▁     █ ▁  <span class="ansi-blue-fg">▃</span> ▁<span class="ansi-green-fg">▁</span>                                         
-  ▇▁█▇▁█▄▄▁▇▄█▄█▄▄<span class="ansi-blue-fg">█</span>▇█<span class="ansi-green-fg">█</span>▄▄▄▇▁▇▇▄▁▄▇▄▁▁▁▁▄▁▁▄▁▁▄▁▇▄▁▁▁▁▁▁▁▁▁▁▁▁▄ ▁
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">79.486 ms</span> … <span class="ansi-magenta-fg">79.618 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">79.518 ms              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">79.521 ms</span> ± <span class="ansi-green-fg">22.772 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>0.00% ± 0.00%
+                 ▂  ▂█ <span class="ansi-blue-fg">█</span> <span class="ansi-green-fg"> </span>          ▂                          
+  █▅█▅▁▁▁██▅█▅▅█▅█▁▁███<span class="ansi-blue-fg">█</span>█<span class="ansi-green-fg">▅</span>▅▅██▁█▅▅███▅▁▁▁▁▅▁▁▁▁▁▁▅▁▁█▁▁▁▁▁▁▁▅ ▁
   79.5 ms<span class="ansi-bright-black-fg">         Histogram: frequency by time</span>        79.6 ms <span class="ansi-bold">&lt;</span>
  Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">326.56 KiB</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">9</span>.</pre>
 </div>
