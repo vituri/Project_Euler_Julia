@@ -10,7 +10,7 @@
 ### Julia
 
 ```{julia}
-is_divisible_by(n::Integer, q::Integer) = n % q == 0;
+include("euler.jl")
 
 function find_next_prime(primes)
     n = primes[end]
@@ -20,7 +20,7 @@ function find_next_prime(primes)
         not_prime = false
     
         for q ∈ primes
-            not_prime = is_divisible_by(n, q)
+            not_prime = Euler.divides(q, n)
             if not_prime
                 break                
             end            

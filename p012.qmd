@@ -13,57 +13,15 @@
 ### Julia
 
 ```{julia}
-divides(d::Integer, n::Integer) = n % d == 0
+include("euler.jl")
 
 triangle(n::Integer) = sum(1:n)
-```
 
-```{julia}
-function prime_factors(n::Integer)
-    divs = [1]
-    temp_n = n
-
-    while temp_n > 1
-        for d ∈ 2:temp_n
-            if divides(d, temp_n) #|| d > isqrt(temp_n)
-                temp_n = div(temp_n, d)
-                push!(divs, d)
-                break
-            end
-
-            if d > isqrt(temp_n)
-                push!(divs, temp_n)
-                temp_n = 1
-                break
-            end
-
-        end
-    end
-
-    return divs
-end
-```
-
-```{julia}
-n = 132
-divs = prime_factors(n)
-
-
-```
-
-```{julia}
-n = 10
-triangle(1002341)
-divs = divisors(11111111111111111)
-
-"$n has divisors $divs"
-```
-
-```{julia}
-function p12(amount_divisors::Int64 = 500)
+function p12(amount_divisors::Int64 = 10)
     n = 1
+    divs = Int64[]
     while true 
-        global divs = prime_factors(triangle(n))
+        divs = Euler.prime_factors(triangle(n))
 
         if length(divs) >= amount_divisors
             break
@@ -73,12 +31,12 @@ function p12(amount_divisors::Int64 = 500)
     end
 
     return "$n has $(length(divs)) divisors: $divs"
-end
+end;
+
+p12()
 ```
 
 ```{julia}
-p12()
-
 using BenchmarkTools;
 @benchmark p12()
 ```
