@@ -55,10 +55,10 @@ function p14()
     return "The biggest chain starts in $n and has $max_chain_length"
 end;
 
-p14()
+# p14()
 ```
 
 ```{julia}
-using BenchmarkTools;
-@benchmark p14()
+# using BenchmarkTools;
+# @benchmark p14()
 ```

@@ -11,18 +11,18 @@ book:
   date: "13/06/2023"
   chapters:
   - index.qmd
-  - qmds/p001.qmd
-  - qmds/p002.qmd
-  - qmds/p003.qmd
-  - qmds/p004.qmd
-  - qmds/p005.qmd
-  - qmds/p006.qmd
-  - qmds/p007.qmd
-  - qmds/p008.qmd
-  - qmds/p009.qmd
-  - qmds/p010.qmd
-  - qmds/p013.qmd
-  - qmds/p014.qmd  
+  - p001.qmd
+  - p002.qmd
+  - p003.qmd
+  - p004.qmd
+  - p005.qmd
+  - p006.qmd
+  - p007.qmd
+  - p008.qmd
+  - p009.qmd
+  - p010.qmd
+  - p013.qmd
+  - p014.qmd  
 
 # bibliography: references.bib
 
