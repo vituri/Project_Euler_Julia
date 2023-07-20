@@ -1,0 +1,5 @@
+# Preface {.unnumbered}
+
+Solving the problems in [Project Euler](https://projecteuler.net/archives) using Julia and, sometimes, R and Python.
+
+This is intended to be an exercise on algorithms and optimization, and, of course, to show how fast Julia is :D

@@ -1,0 +1,34 @@
+project:
+  type: book
+  output-dir: docs
+
+execute:
+  freeze: auto  # re-render only when source changes
+
+book:
+  title: "Project Euler with Julia"
+  author: "G. Vituri"
+  date: "13/06/2023"
+  chapters:
+  - index.qmd
+  - qmds/p001.qmd
+  - qmds/p002.qmd
+  - qmds/p003.qmd
+  - qmds/p004.qmd
+  - qmds/p005.qmd
+  - qmds/p006.qmd
+  - qmds/p007.qmd
+  - qmds/p008.qmd
+  - qmds/p009.qmd
+  - qmds/p010.qmd
+  - qmds/p013.qmd
+  - qmds/p014.qmd  
+
+# bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    # number-depth: 1
+  # pdf:
+  #   documentclass: scrreprt

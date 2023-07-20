@@ -1,0 +1,28 @@
+# Problem 6 {.unnumbered}
+      
+::: {.callout-note icon=false}
+## Problem
+
+<p> The sum of the squares of the first ten natural numbers is
+$1^2+ 2 ^2+ \dots + 10^2 = 385.$</p>
+<p>The square of the sum of the first ten natural numbers is
+$(1+ 2+ \dots + 10)^2 = 3025.$</p>
+</p>Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is $3025-385 = 2640.$</p>
+
+</p> Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum. </p>
+:::
+
+### Julia
+
+```{julia}
+function p6()
+  sum(1:100)^2 - sum((1:100).^2)
+end;
+p6()
+```
+
+```{julia}
+using BenchmarkTools;
+@benchmark p6()
+```
+

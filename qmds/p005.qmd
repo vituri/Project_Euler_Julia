@@ -1,0 +1,87 @@
+# Problem 5 {.unnumbered}
+      
+::: {.callout-note icon=false}
+## Problem
+
+<p>$2520$ is the smallest number that can be divided by each of the numbers from $1$ to $10$ without any remainder.</p>
+<p>What is the smallest positive number that is <dfn class="tooltip">evenly divisible<span class="tooltiptext">divisible with no remainder</span></dfn> by all of the numbers from $1$ to $20$?</p>
+:::
+
+### Julia (using lcm)
+```{julia}
+p5() = lcm(1:20...);
+p5()
+```
+
+```{julia}
+using BenchmarkTools;
+@benchmark p5()
+```
+
+
+### Julia
+
+```{julia}
+function sieve_of_eratosthenes(n::Integer)
+  sieve = trues(n)  # Create a boolean array to mark primes
+  
+  # Set the multiples of primes as false (not prime)
+  for i in 2:isqrt(n)
+    if sieve[i]
+      for j in i^2:i:n
+        sieve[j] = false
+      end
+    end
+  end
+  
+  primes = filter(x -> sieve[x], 2:n)  # Filter out non-primes
+  
+  return primes
+end;
+
+```
+
+```{julia}
+function prime_decomposition(n::Integer)
+    possible_primes = sieve_of_eratosthenes(n)
+    temp_n = n
+    dec = Int32[]
+
+    while temp_n > 1
+        for p ∈ possible_primes
+            q, r = divrem(temp_n, p)            
+            if iszero(r)
+                temp_n = temp_n ÷ p
+                push!(dec, p)
+                break
+            end
+        end
+    end
+    return dec
+end;
+
+function p5()
+    decomposition = map(prime_decomposition, 2:20)
+    distinct_primes = vcat(decomposition...) |> unique
+
+    count_matrix = 
+    map(distinct_primes) do p
+        map(decomposition) do d
+            count(==(p), d)
+        end
+    end |> stack
+
+    primes_powers = map(maximum, eachcol(count_matrix))
+
+    n = (distinct_primes .^ primes_powers) |> prod
+
+    return n
+end;
+
+p5()
+```
+
+```{julia}
+using BenchmarkTools;
+@benchmark p5()
+```

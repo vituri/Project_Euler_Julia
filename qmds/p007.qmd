@@ -1,0 +1,54 @@
+# Problem 7 {.unnumbered}
+
+::: {.callout-note icon=false}
+## Problem
+      
+<p>By listing the first six prime numbers: $2, 3, 5, 7, 11$, and $13$, we can see that the $6$th prime is $13$.</p>
+<p>What is the $10\,001$st prime number?</p>
+:::
+
+### Julia
+
+```{julia}
+is_divisible_by(n::Integer, q::Integer) = n % q == 0;
+
+function find_next_prime(primes)
+    n = primes[end]
+    while true        
+        n += 2
+
+        not_prime = false
+    
+        for q ∈ primes
+            not_prime = is_divisible_by(n, q)
+            if not_prime
+                break                
+            end            
+        end
+
+        if not_prime 
+            continue 
+        end
+    
+        return(n)        
+    end    
+end;
+
+function find_n_primes(n::Integer)
+    primes = [2, 3]
+    while length(primes) < n
+        next_prime = find_next_prime(primes)
+        push!(primes, next_prime)
+    end
+
+    return primes
+end;
+
+p7() = find_n_primes(10_001)[end];
+p7()
+```
+
+```{julia}
+using BenchmarkTools;
+@benchmark p7()
+```
